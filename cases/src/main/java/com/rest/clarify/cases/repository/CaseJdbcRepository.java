@@ -14,6 +14,6 @@ public interface CaseJdbcRepository extends CrudRepository<Cases, Integer>{
 
 	public Cases findByCaseId(int id);
 	
-	public Cases deleteByCaseId(int id);
+	public void deleteByCaseId(int id);
 
 }
