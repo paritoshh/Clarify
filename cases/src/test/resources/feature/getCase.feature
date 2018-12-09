@@ -12,6 +12,6 @@ And Response Header content type should be "application/json"
 And Response Body should not be null or empty
 
 Examples:
-|service name|Case ID|
+|service name|Case ID| 
 |case|5|
 |case|3|
