@@ -19,12 +19,14 @@ public class CaseMapper {
 	}
 
 	public CaseResponse mapCreateCaseResoponse(Cases createdCase) {
-
-		return CaseResponse.builder().caseId(createdCase.getCaseId()).statusId(createdCase.getStatusId())
-				.customerId(createdCase.getCustomerId()).createdBy(createdCase.getCreatedBy())
-				.updatedBy(createdCase.getUpdatedBy()).comments(createdCase.getComments())
-				.createdTime(localDateToString(createdCase.getCreatedTime()))
-				.updatedTime(localDateToString(createdCase.getUpdatedTime())).build();
+		if (createdCase != null) {
+			return CaseResponse.builder().caseId(createdCase.getCaseId()).statusId(createdCase.getStatusId())
+					.customerId(createdCase.getCustomerId()).createdBy(createdCase.getCreatedBy())
+					.updatedBy(createdCase.getUpdatedBy()).comments(createdCase.getComments())
+					.createdTime(localDateToString(createdCase.getCreatedTime()))
+					.updatedTime(localDateToString(createdCase.getUpdatedTime())).build();
+		}
+		return null;
 	}
 
 	/**
