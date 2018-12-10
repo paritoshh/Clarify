@@ -1,54 +1,55 @@
 package com.rest.clarify.cases.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Size;
 
-@Entity(name="CASE")
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Entity(name = "CASES")
+@Getter
+@Setter
+@Builder
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Cases {
-	
-	public int getCaseId() {
-		return caseId;
-	}
-
-
-	public void setCaseId(int caseId) {
-		this.caseId = caseId;
-	}
-
-
-	public String getCustomerName() {
-		return customerName;
-	}
-
-
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
-
-
-	public String getCustomerNumber() {
-		return customerNumber;
-	}
-
-
-	public void setCustomerNumber(String customerNumber) {
-		this.customerNumber = customerNumber;
-	}
-
-
 	@Id
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "case_id")
 	private int caseId;
-	
-	@Column(name="customer_name")
-	@Size(min=8, max=10)
-	private String customerName;
-	
-	
-	@Column(name="customer_number")
-	@Size(min=8, max=10)
-	private String customerNumber;
+
+	@Column(name = "status_id")
+	private int statusId;
+
+	@Column(name = "customer_id")
+	private int customerId;
+
+	@Column(name = "created_time")
+	private LocalDate createdTime;
+
+	@Column(name = "updated_time")
+	private LocalDate updatedTime;
+
+	@Column(name = "priority")
+	private String priority;
+
+	@Column(name = "created_by")
+	private String createdBy;
+
+	@Column(name = "updated_by")
+	private String updatedBy;
+
+	@Column(name = "comments")
+	private String comments;
 
 }
