@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rest.clarify.cases.entity.Cases;
+import com.rest.clarify.cases.model.CaseRequest;
+import com.rest.clarify.cases.model.CaseResponse;
 import com.rest.clarify.cases.service.CreateCase;
 import com.rest.clarify.cases.service.DeleteCase;
 import com.rest.clarify.cases.service.RetrieveCase;
@@ -29,13 +31,13 @@ public class Controller {
 	DeleteCase deleteCase;
 	
 	@PostMapping("/create")
-	public ResponseEntity<Cases> createCase(@RequestBody Cases requestCase){
+	public ResponseEntity<Cases> createCase(@RequestBody CaseRequest requestCase){
 		Cases response = createCase.createNewCase(requestCase);
 		return ResponseEntity.ok(response);
 	}
 	
 	@GetMapping("/case/{id}")
-	public Cases findCase(@PathVariable int id) {
+	public CaseResponse findCase(@PathVariable int id) {
 		return retrieveCase.getCase(id);
 	}
 	
