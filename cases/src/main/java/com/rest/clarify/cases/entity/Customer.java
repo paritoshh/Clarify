@@ -2,6 +2,7 @@ package com.rest.clarify.cases.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +11,7 @@ import lombok.Setter;
 @Setter
 @Entity(name = "CUSTOMER")
 public class Customer {
-
+	@Id
 	@Column(name = "customer_id")
 	private int customerId;
 
