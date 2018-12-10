@@ -37,8 +37,12 @@ public class Controller {
 	}
 	
 	@GetMapping("/case/{id}")
-	public CaseResponse findCase(@PathVariable int id) {
-		return retrieveCase.getCase(id);
+	public ResponseEntity<CaseResponse> findCase(@PathVariable int id) {
+		CaseResponse caseResponse = retrieveCase.getCase(id);
+		if(caseResponse!=null) {
+			return ResponseEntity.ok(caseResponse);
+		}
+		return ResponseEntity.badRequest().body(null);
 	}
 	
 	@GetMapping("/cases")
