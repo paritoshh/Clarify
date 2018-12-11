@@ -51,5 +51,9 @@ public class Cases {
 
 	@Column(name = "comments")
 	private String comments;
+	
+	/*@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "customer_id")
+	private Customer customer;*/
 
 }
