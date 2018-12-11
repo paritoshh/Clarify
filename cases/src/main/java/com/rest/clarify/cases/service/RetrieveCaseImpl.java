@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rest.clarify.cases.entity.Cases;
+import com.rest.clarify.cases.entity.Customer;
 import com.rest.clarify.cases.mapper.CaseMapper;
 import com.rest.clarify.cases.model.CaseResponse;
 import com.rest.clarify.cases.repository.CaseJdbcRepository;
+import com.rest.clarify.cases.repository.CustomerJdbcRepository;
 
 @Service
 public class RetrieveCaseImpl implements RetrieveCase{
@@ -16,12 +18,26 @@ public class RetrieveCaseImpl implements RetrieveCase{
 	@Autowired
 	CaseJdbcRepository caseRepo;
 	@Autowired
+	CustomerJdbcRepository customerRepo;
+	@Autowired
 	CaseMapper caseMapper;
 	
 	@Override
 	public CaseResponse getCase(int id) {
 		
-		return caseMapper.mapCreateCaseResoponse(caseRepo.findByCaseId(id));
+		Cases caseInDB = caseRepo.findByCaseId(id);
+		if(caseInDB==null) {
+			return null;
+		}
+		Customer customer = customerRepo.findByCustomerId(caseInDB.getCustomerId());
+		if(caseInDB!=null & customer!=null) {
+			return caseMapper.mapCreateCaseResoponse(caseInDB, customer);
+		}
+		if(customer==null) {
+			return caseMapper.mapCreateCaseResoponse(caseInDB);
+		}
+		return null;
+		
 	}
 
 	@Override
