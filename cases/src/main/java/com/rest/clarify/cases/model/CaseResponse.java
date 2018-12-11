@@ -22,6 +22,11 @@ public class CaseResponse {
 	private String createdBy;
 	private String updatedBy;
 	private String comments;
-	
+	private String customerFName;
+	private String customerMName;
+	private String customerLName;
+	private String customerEmail;
+	private String customerMobileNumber;
+	private String customerAddress;
 
 }

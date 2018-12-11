@@ -2,8 +2,11 @@ package com.rest.clarify.cases.mapper;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 import org.springframework.stereotype.Component;
+
 import com.rest.clarify.cases.entity.Cases;
+import com.rest.clarify.cases.entity.Customer;
 import com.rest.clarify.cases.model.CaseRequest;
 import com.rest.clarify.cases.model.CaseResponse;
 
@@ -18,13 +21,27 @@ public class CaseMapper {
 
 	}
 
+	public CaseResponse mapCreateCaseResoponse(Cases createdCase, Customer customer) {
+		if (createdCase != null) {
+			return CaseResponse.builder().caseId(createdCase.getCaseId()).statusId(createdCase.getStatusId())
+					.customerId(createdCase.getCustomerId()).createdBy(createdCase.getCreatedBy())
+					.updatedBy(createdCase.getUpdatedBy()).comments(createdCase.getComments())
+					.createdTime(localDateToString(createdCase.getCreatedTime()))
+					.updatedTime(localDateToString(createdCase.getUpdatedTime())).priority(createdCase.getPriority()).customerFName(customer.getFName())
+					.customerMName(customer.getMName()).customerLName(customer.getLName())
+					.customerMobileNumber(customer.getPrimaryMobileNumber())
+					.customerAddress(customer.getPrimaryAddress()).build();
+		}
+		return null;
+	}
+	
 	public CaseResponse mapCreateCaseResoponse(Cases createdCase) {
 		if (createdCase != null) {
 			return CaseResponse.builder().caseId(createdCase.getCaseId()).statusId(createdCase.getStatusId())
 					.customerId(createdCase.getCustomerId()).createdBy(createdCase.getCreatedBy())
 					.updatedBy(createdCase.getUpdatedBy()).comments(createdCase.getComments())
 					.createdTime(localDateToString(createdCase.getCreatedTime()))
-					.updatedTime(localDateToString(createdCase.getUpdatedTime())).build();
+					.updatedTime(localDateToString(createdCase.getUpdatedTime())).priority(createdCase.getPriority()).build();
 		}
 		return null;
 	}
