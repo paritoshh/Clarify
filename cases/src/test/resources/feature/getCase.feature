@@ -1,17 +1,15 @@
 
 Feature: This feature is to check GET API Case Retrival
-
+@Test1
 Scenario Outline: Check user is able to submit GET API request 
 Given GET API Case Retrival EndPoint URl 
-When Provide CaseID
-And Set HEADER param request content type as "application/json"
-And Set HEADER param response accept type as "application/json"
+When Provide caseId as <caseId>
+Then Call GetAPI to fetch case
 Then Validate HTTP response should be retrieved
 And Response HTTP code should be 200
-And Response Header content type should be "application/json"
-And Response Body should not be null or empty
+And CustomerNumber should be as <customerNumber>
 
 Examples:
-|service name|Case ID| 
-|case|5|
-|case|3|
+|serviceName|caseId| location| customername|customerNumber|
+|case|5|Banglore|NIKE|Ikea00005|
+|case|3|Delhi|ADDIDAS|NETTO003|

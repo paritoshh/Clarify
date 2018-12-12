@@ -1,10 +1,11 @@
 package com.rest.clarify.runner;
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.testng.AbstractTestNGCucumberTests;
+import org.junit.runner.RunWith;
 
-@CucumberOptions(features="src/test/resources/feature/"
-,glue= {"com/rest/clarify"})
-public class CaseFetchRunner extends AbstractTestNGCucumberTests {
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+@RunWith(Cucumber.class)
+@CucumberOptions(features= {"src/test/resources/feature"},tags= {"@Test"}, glue= {""})
+public class CaseFetchRunner  {
 
 }
