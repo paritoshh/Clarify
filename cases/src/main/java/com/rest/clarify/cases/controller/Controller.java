@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rest.clarify.cases.entity.Cases;
 import com.rest.clarify.cases.model.CaseRequest;
 import com.rest.clarify.cases.model.CaseResponse;
+import com.rest.clarify.cases.model.CaseResponseList;
 import com.rest.clarify.cases.service.CreateCase;
 import com.rest.clarify.cases.service.DeleteCase;
 import com.rest.clarify.cases.service.RetrieveCase;
@@ -46,12 +47,16 @@ public class Controller {
 	}
 	
 	@GetMapping("/cases")
-	public List<Cases> findAllCases() {
+	public List<CaseResponse> findAllCases() {
 		return retrieveCase.getAllCases();
 	}
 	@PutMapping("/case/{id}")
 	public void deleteCase(@PathVariable int id) {
 		 deleteCase.deleteCase(id);
+	}
+	@GetMapping("/cases/{id}")
+	public ResponseEntity<CaseResponseList> findByCustomer(@PathVariable Integer id){
+		return ResponseEntity.ok(retrieveCase.getAllCasesByCustomerId(id));
 	}
 
 }
