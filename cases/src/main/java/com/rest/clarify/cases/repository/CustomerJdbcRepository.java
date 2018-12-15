@@ -8,7 +8,7 @@ import com.rest.clarify.cases.entity.Customer;
 @Repository
 public interface CustomerJdbcRepository extends CrudRepository<Customer, Integer>{
 	
-	public Customer findByCustomerId(int id);
+	public Customer findByCustomerId(Integer id);
 	
 
 }

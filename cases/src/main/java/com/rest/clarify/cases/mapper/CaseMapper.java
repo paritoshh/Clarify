@@ -29,6 +29,7 @@ public class CaseMapper {
 					.createdTime(localDateToString(createdCase.getCreatedTime()))
 					.updatedTime(localDateToString(createdCase.getUpdatedTime())).priority(createdCase.getPriority()).customerFName(customer.getFName())
 					.customerMName(customer.getMName()).customerLName(customer.getLName())
+					.customerEmail(customer.getCustomerEmail())
 					.customerMobileNumber(customer.getPrimaryMobileNumber())
 					.customerAddress(customer.getPrimaryAddress()).build();
 		}

@@ -1,5 +1,7 @@
 package com.rest.clarify.cases.repository;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +17,7 @@ public interface CaseJdbcRepository extends CrudRepository<Cases, Integer>{
 	public Cases findByCaseId(int id);
 	
 	public void deleteByCaseId(int id);
+	
+	public List<Cases> findByCustomerId(Integer id);
 
 }
