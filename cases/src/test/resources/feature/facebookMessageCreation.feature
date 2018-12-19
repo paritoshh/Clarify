@@ -16,22 +16,22 @@
 #""
 ## (Comments)
 #Sample Feature Definition Template
-Feature: Login to Facebook
+@tag
+Feature: Message writing
 
-  @Facebook1
-  Scenario: Login to Facebook with valid credentials
+  @FacebookTest2
+  Scenario Outline: Writing message after login to facebook application
     Given User is on Loginpage
-    And User enter Username  
-    And User enter Password 
+    And User enter Username
+    And User enter Password
     When User click on LogIn button
     Then User should able to login successfully
+    Then User send message to <friends>
+    Then User minimize the message tab and close the tab
+    Then User logout the facebook application
     Then User close the browser
     
-  Scenario: Login to Facebook with invalid password
-    Given User is on Loginpage
-    And User enter Username  
-    And User enter Password as <abc123>
-    When User click on LogIn button
-    Then User should not able to login
-    Then User close the browser
-    
+
+    Examples: 
+      | friends          |
+      | Paritosh Agarwal |
