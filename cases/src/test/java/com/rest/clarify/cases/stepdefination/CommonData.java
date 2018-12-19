@@ -2,12 +2,19 @@ package com.rest.clarify.cases.stepdefination;
 
 import io.restassured.response.Response;
 
-public class CommonData {
+public  class CommonData {
 	
 	private String endPointURL;
 	public Response response;
 	private String apiUrl;
+	int caseCount ;
 	
+	public int getCaseCount() {
+		return caseCount;
+	}
+	public void setCaseCount(int caseCount) {
+		this.caseCount = caseCount;
+	}
 	public Response getResponse() {
 		return response;
 	}
