@@ -1,5 +1,7 @@
 package com.rest.clarify.cases.exception.handler;
 
+import java.util.Date;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -20,7 +22,7 @@ public class CustomisedExceptionHandler extends ResponseEntityExceptionHandler {
 	public final ResponseEntity<ErrorDetails> handleCaseNotFoundException(CaseNotFoundException exception,
 			WebRequest request) {
 		return new ResponseEntity<>(
-				ErrorDetails.builder().code("ER001").message(exception.getMessage()).details("").build(),
+				ErrorDetails.builder().code("ER001").message(exception.getMessage()).details("").timestamp(new Date()).build(),
 				HttpStatus.NOT_FOUND);
 
 	}
@@ -28,8 +30,8 @@ public class CustomisedExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(GenericException.class)
 	public final ResponseEntity<ErrorDetails> handleCaseNotFoundException(GenericException exception) {
 		return new ResponseEntity<>(
-				ErrorDetails.builder().code("ER002").message(exception.getMessage()).details("").build(),
-				HttpStatus.INTERNAL_SERVER_ERROR);
+				ErrorDetails.builder().code("ER002").message(exception.getMessage()).details("").timestamp(new Date()).build(),
+				HttpStatus.NOT_FOUND);
 
 	}
 
