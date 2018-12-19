@@ -48,8 +48,8 @@ public class Controller {
 	}
 	
 	@GetMapping("/cases")
-	public List<CaseResponse> findAllCases() {
-		return retrieveCase.getAllCases();
+	public ResponseEntity<CaseResponseList> findAllCases() {
+		return ResponseEntity.ok(retrieveCase.getAllCases());
 	}
 	@PutMapping("/case/{id}")
 	public void deleteCase(@PathVariable int id) {

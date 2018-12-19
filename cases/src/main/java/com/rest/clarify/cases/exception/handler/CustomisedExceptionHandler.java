@@ -21,14 +21,17 @@ public class CustomisedExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(CaseNotFoundException.class)
 	public final ResponseEntity<ErrorDetails> handleCaseNotFoundException(CaseNotFoundException exception,
 			WebRequest request) {
-		ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(),"");
-		return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(
+				ErrorDetails.builder().code("ER001").message(exception.getMessage()).details("").timestamp(new Date()).build(),
+				HttpStatus.NOT_FOUND);
 
 	}
+
 	@ExceptionHandler(GenericException.class)
 	public final ResponseEntity<ErrorDetails> handleCaseNotFoundException(GenericException exception) {
-		ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(),"");
-		return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<>(
+				ErrorDetails.builder().code("ER002").message(exception.getMessage()).details("").timestamp(new Date()).build(),
+				HttpStatus.NOT_FOUND);
 
 	}
 

@@ -2,17 +2,26 @@ package com.rest.clarify.cases.model;
 
 import java.util.Date;
 
-public class ErrorDetails {
-	
-	 private Date timestamp;
-	  private String message;
-	  private String details;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
-	  public ErrorDetails(Date timestamp, String message, String details) {
-	    super();
-	    this.timestamp = timestamp;
-	    this.message = message;
-	    this.details = details;
-	  }
+@Getter
+@Setter
+@Builder
+public class ErrorDetails {
+
+	private String code;
+	private String message;
+	private String details;
+	private Date timestamp;
+
+
+	public ErrorDetails(String code, String message, String details, Date timestamp) {
+		this.code = code;
+		this.message = message;
+		this.details = details;
+		this.timestamp = timestamp;
+	}
 
 }
