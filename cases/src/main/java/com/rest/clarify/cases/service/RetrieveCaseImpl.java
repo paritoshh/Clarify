@@ -17,7 +17,7 @@ import com.rest.clarify.cases.repository.CaseJdbcRepository;
 import com.rest.clarify.cases.repository.CustomerJdbcRepository;
 
 @Service
-public class RetrieveCaseImpl implements RetrieveCase{
+public class RetrieveCaseImpl implements RetrieveCase {
 
 	@Autowired
 	CaseJdbcRepository caseRepo;
@@ -25,46 +25,52 @@ public class RetrieveCaseImpl implements RetrieveCase{
 	CustomerJdbcRepository customerRepo;
 	@Autowired
 	CaseMapper caseMapper;
-	
+
 	@Override
 	public CaseResponse getCase(int id) {
-		
+
 		Cases caseInDB = caseRepo.findByCaseId(id);
-		if(caseInDB==null) {
-			throw new CaseNotFoundException("No case found for id "+id);
+		if (caseInDB == null) {
+			throw new CaseNotFoundException("No case found for id " + id);
 		}
 		Customer customer = getCustomerDetailsById(caseInDB.getCustomerId());
-		if(caseInDB!=null & customer!=null) {
+		if (caseInDB != null & customer != null) {
 			return caseMapper.mapCreateCaseResoponse(caseInDB, customer);
 		}
-		if(customer==null) {
+		if (customer == null) {
 			return caseMapper.mapCreateCaseResoponse(caseInDB);
 		}
 		throw new GenericException("Something went wrong");
 	}
 
 	@Override
-	public List<CaseResponse> getAllCases() {
+	public CaseResponseList getAllCases() throws NoClassDefFoundError {
 		List<CaseResponse> caseResponses = new ArrayList<>();
 		List<Cases> cases = (List<Cases>) caseRepo.findAll();
-		cases.stream().forEach(eachCase->{
-			caseResponses.add(caseMapper.mapCreateCaseResoponse(eachCase, getCustomerDetailsById(eachCase.getCustomerId())));
+		cases.stream().forEach(eachCase -> {
+			Customer customer = getCustomerDetailsById(eachCase.getCustomerId());
+			if (customer != null) {
+				caseResponses.add(caseMapper.mapCreateCaseResoponse(eachCase, customer));
+			}
 		});
-		return caseResponses;
+		if (caseResponses.isEmpty()) {
+			throw new CaseNotFoundException("No valid case found");
+		}
+		return CaseResponseList.builder().caseResponseList(caseResponses).build();
 	}
 
 	@Override
 	public CaseResponseList getAllCasesByCustomerId(Integer id) {
-		
+
 		List<Cases> cases = (List<Cases>) caseRepo.findByCustomerId(id);
 		List<CaseResponse> caseResponses = new ArrayList<>();
 		Customer customer = getCustomerDetailsById(id);
-		cases.stream().forEach(caseElement->{
-			caseResponses.add(caseMapper.mapCreateCaseResoponse(caseElement,customer));
+		cases.stream().forEach(caseElement -> {
+			caseResponses.add(caseMapper.mapCreateCaseResoponse(caseElement, customer));
 		});
 		return CaseResponseList.builder().caseResponseList(caseResponses).build();
 	}
-	
+
 	private Customer getCustomerDetailsById(Integer id) {
 		return customerRepo.findByCustomerId(id);
 	}
